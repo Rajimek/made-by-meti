@@ -1,0 +1,601 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 260 60% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
+
+    --radius: 0.5rem;
+
+    --header-bg: 0 0% 0%;
+    --section-dark: 250 40% 25%;
+    --section-dark-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 260 60% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 80%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── App Layout ── */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  height: 100vh;
+  padding: 30px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.sidebar-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar-social-link {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  color: #666;
+  transition: color 200ms ease;
+  text-decoration: none;
+}
+
+.sidebar-social-link:hover {
+  color: #000;
+}
+
+.sidebar-brand {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 0.05em;
+  margin-bottom: 30px;
+  padding: 12px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 200ms ease;
+}
+
+.sidebar-nav a:hover {
+  color: #000;
+}
+
+/* Main content offset for sidebar */
+.app-layout main {
+  flex: 1;
+  margin-left: 100px;
+}
+
+/* Hamburger button — hidden on desktop */
+.sidebar-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 12px;
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 20px;
+  }
+
+  .sidebar-top {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sidebar-brand {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+
+  /* Hide nav and bottom on mobile — they live in the overlay */
+  .sidebar-nav--desktop {
+    display: none;
+  }
+
+  .sidebar-bottom--desktop {
+    display: none;
+  }
+
+  .sidebar-hamburger {
+    display: flex;
+    align-items: center;
+  }
+
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .app-layout main {
+    margin-left: 0;
+  }
+}
+
+/* ── Mobile Overlay ── */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 24px;
+}
+
+.mobile-overlay-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-overlay-close:hover {
+  color: #000;
+}
+
+.mobile-overlay-nav {
+  list-style: none;
+  margin: 60px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-overlay-nav a {
+  display: block;
+  padding: 16px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 200ms ease;
+}
+
+.mobile-overlay-nav a:hover {
+  color: #000;
+}
+
+.mobile-overlay-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-overlay-socials {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+/* ── Media Grid ── */
+.media-grid {
+  position: relative;
+  width: 100%;
+  padding: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+@media (max-width: 640px) {
+  .media-grid {
+    padding-top: 30px;
+  }
+}
+
+/* Grid container — Isotope handles layout */
+.media-grid .grid-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Tile base — 5 columns max (20% each) */
+.grid-item {
+  position: relative;
+  width: 20%;
+  cursor: pointer;
+}
+
+.grid-item.grid-item--wide,
+.grid-item.grid-item--large {
+  width: 40%;
+}
+
+/* Shim images set aspect ratio */
+.grid-item .shim {
+  width: 100%;
+  display: block;
+}
+
+/* Responsive: 2 columns on mobile */
+@media (max-width: 640px) {
+  .grid-item { width: 50%; }
+  .grid-item.grid-item--wide,
+  .grid-item.grid-item--large { width: 100%; }
+}
+
+/* Responsive: 3 columns on small tablets */
+@media (min-width: 641px) and (max-width: 896px) {
+  .grid-item { width: 33.33%; }
+  .grid-item.grid-item--wide,
+  .grid-item.grid-item--large { width: 66.66%; }
+}
+
+/* Responsive: 4 columns on tablets */
+@media (min-width: 897px) and (max-width: 1024px) {
+  .grid-item { width: 25%; }
+  .grid-item.grid-item--wide,
+  .grid-item.grid-item--large { width: 50%; }
+}
+
+/* Responsive: 5 columns on desktop (default, capped at max-width) */
+@media (min-width: 1025px) {
+  .grid-item { width: 20%; }
+  .grid-item.grid-item--wide,
+  .grid-item.grid-item--large { width: 40%; }
+}
+
+/* Inner cell — 6px gutter via absolute inset */
+.grid-item .inner {
+  position: absolute;
+  inset: 6px;
+  overflow: hidden;
+  background-color: #434343;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 10%;
+  transition: all 600ms ease-in-out;
+}
+
+.grid-item.grid-item--wide .inner { background-position: 30% 20%; }
+.grid-item.grid-item--tall .inner  { background-position: 50% 0; }
+.grid-item.grid-item--large .inner { background-position: 25% 5%; }
+
+.grid-item .inner.grayscale {
+  filter: grayscale(100%);
+}
+
+.grid-item:hover .inner.grayscale,
+.grid-item.touch-active .inner.grayscale {
+  filter: grayscale(0%);
+}
+
+/* Hover overlay — centered text, subtle dim */
+.grid-item .overview {
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.grid-item:hover .overview,
+.grid-item.touch-active .overview {
+  opacity: 1;
+}
+
+/* Overlay typography */
+.grid-item .overview .title {
+  margin: 0 0 4px 0;
+  padding: 0;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.grid-item .overview .timestamp {
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+}
+
+.grid-item .overview .type {
+  display: none;
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .grid-item .overview .title { font-size: 12px; }
+  .grid-item .overview .timestamp { font-size: 9px; }
+}
+
+@media (max-width: 640px) {
+  .grid-item .overview .title { font-size: 11px; }
+  .grid-item .overview .timestamp { font-size: 8px; }
+}
+
+/* ── Listing Grid ── */
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 6px;
+  background: hsl(var(--background));
+}
+
+@media (min-width: 641px) {
+  .listing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.listing-tile {
+  display: block;
+  text-decoration: none;
+}
+
+.listing-tile-inner {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+
+.listing-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  padding: 12px;
+}
+
+.listing-tile:hover .listing-tile-overlay {
+  opacity: 1;
+}
+
+.listing-tile-title {
+  color: #fff;
+  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.listing-tile-sub {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 4px;
+}
+
+/* ── Video Grid (2-up cinema) ── */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 6px;
+  background: hsl(var(--background));
+}
+
+@media (min-width: 641px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.video-tile {
+  display: block;
+  text-decoration: none;
+}
+
+.video-tile-inner {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 cinema aspect */
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+
+.video-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  padding: 12px;
+}
+
+.video-tile:hover .video-tile-overlay {
+  opacity: 1;
+}
+
+/* ── Bio Page ── */
+.bio-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+
+@media (max-width: 640px) {
+  .bio-cover {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+.bio-text {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: center;
+}
+
