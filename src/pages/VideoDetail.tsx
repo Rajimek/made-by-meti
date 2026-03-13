@@ -3,24 +3,17 @@ import Sidebar from "@/components/Sidebar";
 import { videos } from "@/data/videos";
 import { ArrowLeft, Circle } from "lucide-react";
 
-import videoBg from "@/assets/video-bg.jpg";
-import performanceImg from "@/assets/performance.jpg";
-import heroBg from "@/assets/hero-bg.jpg";
-
-const thumbnails = [videoBg, performanceImg, heroBg];
-
 const categoryLabel: Record<string, string> = {
-  live: "Live Set",
-  studio: "Studio",
+  live: "Installation",
+  studio: "Studio Note",
   documentary: "Documentary",
-  aftermovie: "Aftermovie",
-  choreography: "Choreography",
+  aftermovie: "Exhibition Reel",
+  choreography: "Process Clip",
 };
 
 const VideoDetail = () => {
   const { id } = useParams<{ id: string }>();
   const video = videos.find((v) => v.id === id);
-  const videoIndex = videos.findIndex((v) => v.id === id);
 
   if (!video) {
     return (
@@ -29,8 +22,8 @@ const VideoDetail = () => {
         <main className="main-content">
           <div style={{ padding: 6 }}>
             <div className="bg-background p-10 md:p-12">
-              <p className="text-muted-foreground">Video not found.</p>
-              <Link to="/videos" className="text-foreground underline mt-4 inline-block">Back to videos</Link>
+              <p className="text-muted-foreground">Process entry not found.</p>
+              <Link to="/process" className="text-foreground underline mt-4 inline-block">Back to process</Link>
             </div>
           </div>
         </main>
@@ -47,7 +40,7 @@ const VideoDetail = () => {
             {/* Left – info pane */}
             <div className="w-full md:w-1/2 bg-background p-10 md:p-12 flex flex-col">
               <Link
-                to="/videos"
+                to="/process"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors mb-8"
               >
                 <ArrowLeft size={14} />
@@ -67,9 +60,9 @@ const VideoDetail = () => {
                 {video.description}
               </p>
 
-              {/* Watch links */}
+              {/* Resource links */}
               <div className="mb-10">
-                {["YouTube", "Soundcloud"].map((platform, i) => (
+                {["Vimeo", "Process Notes"].map((platform, i) => (
                   <a
                     key={i}
                     href="#"
@@ -85,7 +78,7 @@ const VideoDetail = () => {
             {/* Right – thumbnail */}
             <div className="w-full md:w-1/2 bg-muted min-h-[400px] md:min-h-[700px] relative order-first md:order-last">
               <img
-                src={thumbnails[videoIndex % thumbnails.length]}
+                src={video.thumbnail}
                 alt={video.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -25,6 +25,11 @@ const NewsletterModal = ({ open, onClose }: NewsletterModalProps) => {
     const trimmed = email.trim();
     if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setError("Please enter a valid email.");
+      return;
+    }
+
+    if (!hasSupabaseConfig) {
+      setMessage("Newsletter signup is disabled until Supabase is configured.");
       return;
     }
 

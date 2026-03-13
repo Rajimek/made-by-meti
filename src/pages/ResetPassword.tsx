@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
 import Sidebar from "@/components/Sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,26 @@ const ResetPassword = () => {
     }
   }, []);
 
+  if (!hasSupabaseConfig) {
+    return (
+      <div className="app-layout">
+        <Sidebar />
+        <main className="main-content">
+          <div style={{ padding: 6 }}>
+            <div className="bg-background p-10 md:p-12 max-w-md">
+              <h1 className="text-2xl font-bold uppercase tracking-tight text-foreground mb-4">
+                Reset Password
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Password reset is unavailable until Supabase is configured for this project.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -31,8 +51,8 @@ const ResetPassword = () => {
       if (error) throw error;
       setMessage("Password updated! Redirecting...");
       setTimeout(() => navigate("/"), 2000);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }

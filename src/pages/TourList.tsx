@@ -9,7 +9,7 @@ const TourList = () => {
         <div style={{ padding: 6 }}>
           <div className="bg-background p-10 md:p-12">
             <h1 className="text-2xl font-bold uppercase tracking-tight text-foreground mb-8">
-              Tour Dates
+              Exhibitions
             </h1>
             <div className="space-y-0">
               {tourDates.map((d, i) => (
@@ -28,7 +28,7 @@ const TourList = () => {
                       href={d.ticketLink}
                       className="text-xs uppercase tracking-widest text-foreground hover:text-muted-foreground transition-colors border border-border px-3 py-1.5 shrink-0 min-w-fit"
                     >
-                      Tickets
+                      Details
                     </a>
                   )}
                 </div>

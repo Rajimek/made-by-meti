@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Isotope from "isotope-layout";
+import bioCover from "@/assets/bio-cover.jpg";
+import heroBg from "@/assets/hero-bg.jpg";
+import performanceImg from "@/assets/performance.jpg";
+import portraitImg from "@/assets/portrait.jpg";
+import referenceImg from "@/assets/reference.png";
+import videoBg from "@/assets/video-bg.jpg";
 
 interface GridTileProps {
   type: string;
@@ -11,11 +18,16 @@ interface GridTileProps {
   grayscale?: boolean;
 }
 
+const createShimSrc = (width: number, height: number) =>
+  `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"></svg>`
+  )}`;
+
 const shimSrc = {
-  square: "https://www.rihannanow.com/wp-content/themes/rihannanow2014/images/media-grid-shim-square.png",
-  wide: "https://www.rihannanow.com/wp-content/themes/rihannanow2014/images/media-grid-shim-wide.png",
-  tall: "https://www.rihannanow.com/wp-content/themes/rihannanow2014/images/media-grid-shim-tall.png",
-  large: "https://www.rihannanow.com/wp-content/themes/rihannanow2014/images/media-grid-shim-large.png",
+  square: createShimSrc(100, 100),
+  wide: createShimSrc(200, 100),
+  tall: createShimSrc(100, 200),
+  large: createShimSrc(200, 200),
 };
 
 const GridTile = ({
@@ -61,129 +73,128 @@ const GridTile = ({
         className={innerClass}
         style={{ backgroundImage: `url(${image})` }}
       >
-        <a href={href}>
+        <Link to={href}>
           <div className="overview">
             <h3 className="title">{title}</h3>
             <p className="timestamp">{type} · {timestamp}</p>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );
 };
 
-// Using actual rihannanow.com images
 const tiles: GridTileProps[] = [
   {
-    type: "MUSIC",
-    title: "Neon Portraits",
-    timestamp: "Feb 22, 2026",
-    image: "https://images.unsplash.com/photo-1761882725885-d3d8bd2032d1?w=1200&q=80&auto=format&fit=crop",
-    href: "/music/infinite-drift",
+    type: "ARTWORK",
+    title: "Salt Memory",
+    timestamp: "Series",
+    image: heroBg,
+    href: "/artworks/salt-memory",
     variant: "large",
   },
   {
-    type: "VIDEO",
-    title: "Choreography Session",
-    timestamp: "Feb 22, 2026",
-    image: "https://img.youtube.com/vi/C6Al-tkTJbk/hqdefault.jpg",
-    href: "/videos/choreography-session",
+    type: "PROCESS",
+    title: "Studio Walkthrough",
+    timestamp: "Film",
+    image: videoBg,
+    href: "/process/studio-walkthrough-salt-memory",
     variant: "wide",
   },
   {
-    type: "MUSIC",
-    title: "Sunglasses Session",
-    timestamp: "Feb 15, 2026",
-    image: "https://images.unsplash.com/photo-1761930293133-b216e52c1686?w=640&q=80&auto=format&fit=crop",
-    href: "/music/tideshift-sessions-vol-3",
+    type: "ARTWORK",
+    title: "Kiln Study 03",
+    timestamp: "Object",
+    image: portraitImg,
+    href: "/artworks/kiln-study-03",
     variant: "tall",
   },
   {
-    type: "MUSIC",
-    title: "Motion Blur",
-    timestamp: "Feb 10, 2026",
-    image: "https://images.unsplash.com/photo-1761930293047-50eadfc3bdcc?w=640&q=80&auto=format&fit=crop",
-    href: "/music/lucid-architecture",
+    type: "ARTWORK",
+    title: "Museum Light",
+    timestamp: "Installation",
+    image: referenceImg,
+    href: "/artworks/museum-light",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Tank Top Portrait",
-    timestamp: "Feb 5, 2026",
-    image: "https://images.unsplash.com/photo-1761882132468-c7035c9aff26?w=640&q=80&auto=format&fit=crop",
-    href: "/music/fade-to-signal",
+    type: "JOURNAL",
+    title: "Building MADE",
+    timestamp: "Entry",
+    image: bioCover,
+    href: "/journal/building-made",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Neon Lights",
-    timestamp: "Jan 28, 2026",
-    image: "https://images.unsplash.com/photo-1761882717631-824133aedc0e?w=640&q=80&auto=format&fit=crop",
-    href: "/music/night-garden",
+    type: "EXHIBITION",
+    title: "Material Echoes",
+    timestamp: "Upcoming",
+    image: performanceImg,
+    href: "/exhibitions",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Peace Sign",
-    timestamp: "Jan 20, 2026",
-    image: "https://images.unsplash.com/photo-1761882298487-582160fdcd4c?w=640&q=80&auto=format&fit=crop",
-    href: "/music/weightless",
+    type: "ARTWORK",
+    title: "Cinder Atlas",
+    timestamp: "Relief",
+    image: heroBg,
+    href: "/artworks/cinder-atlas",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Orange Profile",
-    timestamp: "Jan 12, 2026",
-    image: "https://images.unsplash.com/photo-1761882738571-6cf4f77f9b65?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "PROCESS",
+    title: "Glaze Tests",
+    timestamp: "Studio Note",
+    image: portraitImg,
+    href: "/process/glaze-tests-and-material-swatches",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Blurred Shades",
-    timestamp: "Jan 5, 2026",
-    image: "https://images.unsplash.com/photo-1761882344736-060c1109ff26?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "ARTWORK",
+    title: "Soft Bodies",
+    timestamp: "Wall Work",
+    image: bioCover,
+    href: "/artworks/soft-bodies",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Chin Thoughts",
-    timestamp: "Dec 28, 2025",
-    image: "https://images.unsplash.com/photo-1761882335412-b9ff106e8766?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "JOURNAL",
+    title: "Open Studio Notes",
+    timestamp: "Entry",
+    image: videoBg,
+    href: "/journal/open-studio-notes",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Hands Over Face",
-    timestamp: "Dec 20, 2025",
-    image: "https://images.unsplash.com/photo-1761882057299-b06c9eb7561b?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "ARTWORK",
+    title: "After Glaze",
+    timestamp: "Series",
+    image: referenceImg,
+    href: "/artworks/after-glaze",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Tattoo Portrait",
-    timestamp: "Dec 12, 2025",
-    image: "https://images.unsplash.com/photo-1761792008900-8cd5994ac601?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "PROCESS",
+    title: "Installing Tactile Echoes",
+    timestamp: "Film",
+    image: performanceImg,
+    href: "/process/installing-tactile-echoes",
     variant: "square",
   },
   {
-    type: "MUSIC",
-    title: "Cheek Pull",
-    timestamp: "Dec 5, 2025",
-    image: "https://images.unsplash.com/photo-1761792444425-1bae3ba0c86b?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "EXHIBITION",
+    title: "Warehouse Viewing Room",
+    timestamp: "Archive",
+    image: heroBg,
+    href: "/exhibitions",
     variant: "wide",
   },
   {
-    type: "MUSIC",
-    title: "Looking Up",
-    timestamp: "Nov 28, 2025",
-    image: "https://images.unsplash.com/photo-1761791942939-ee8f3c5c717c?w=640&q=80&auto=format&fit=crop",
-    href: "#",
+    type: "ABOUT",
+    title: "Meti / Practice",
+    timestamp: "Profile",
+    image: bioCover,
+    href: "/about",
     variant: "square",
   },
 ];

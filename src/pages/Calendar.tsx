@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { tourDates } from "@/data/tourDates";
 
-const spacedDate = (d: string) => d.split("").join(" ").replace(/  /g, "   ");
+const spacedDate = (d: string) => d.split("").join(" ").replace(/ {2}/g, "   ");
 
 const Calendar = () => {
   const [showTop, setShowTop] = useState(false);

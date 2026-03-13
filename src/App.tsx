@@ -28,13 +28,21 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/artworks" element={<MusicList />} />
             <Route path="/music" element={<MusicList />} />
+            <Route path="/artworks/:slug" element={<MusicDetail />} />
             <Route path="/music/:slug" element={<MusicDetail />} />
+            <Route path="/process" element={<VideosList />} />
             <Route path="/videos" element={<VideosList />} />
+            <Route path="/process/:id" element={<VideoDetail />} />
             <Route path="/videos/:id" element={<VideoDetail />} />
+            <Route path="/exhibitions" element={<TourList />} />
             <Route path="/tour" element={<TourList />} />
+            <Route path="/about" element={<Bio />} />
             <Route path="/bio" element={<Bio />} />
+            <Route path="/journal" element={<News />} />
             <Route path="/news" element={<News />} />
+            <Route path="/journal/:slug" element={<NewsPost />} />
             <Route path="/news/:slug" element={<NewsPost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />

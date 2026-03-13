@@ -1,6 +1,7 @@
 import Sidebar from "@/components/Sidebar";
+import bioCover from "@/assets/bio-cover.jpg";
 
-const coverImage = "https://images.unsplash.com/photo-1761792444425-1bae3ba0c86b?w=1600&q=80&auto=format&fit=crop";
+const coverImage = bioCover;
 
 const Bio = () => {
   return (
@@ -12,7 +13,7 @@ const Bio = () => {
           <div className="bio-cover">
             <img
               src={coverImage}
-              alt="Ocean"
+              alt="MADE by Meti"
               className="absolute inset-0 w-full h-full object-cover object-top"
             />
           </div>
@@ -20,19 +21,19 @@ const Bio = () => {
           {/* Bio text */}
           <div className="bio-text">
             <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-foreground mb-6">
-              Ocean
+              MADE by Meti
             </h1>
             <p className="text-sm text-foreground/80 leading-relaxed mb-4">
-              Ocean is a Metro City-based electronic music artist, DJ, and movement artist whose sound sits at the intersection of melodic techno, progressive house, and ambient electronica. Known for immersive, emotionally charged sets that blend deep textures with driving rhythms, Ocean has built a devoted following through relentless touring and a commitment to sonic exploration.
+              MADE is a viewing space and web project built around Meti's ceramic, installation, and image-based practice. The work leans toward surfaces that hold evidence of pressure, firing, and repeated handling rather than polished finish.
             </p>
             <p className="text-sm text-foreground/80 leading-relaxed mb-4">
-              Since emerging in 2021, Ocean has performed at some of the world's most respected electronic music events — from Amsterdam Dance Event and Harmony Festival to intimate warehouse sessions in Berlin. Their signature Tideshift events have become a cornerstone of Metro City's underground scene, drawing thousands for all-day experiences that blur the line between DJ set and art installation.
+              This template has been reshaped from its original artist-site starter into a gallery-first structure: artworks, process films, exhibitions, and a journal can all live side by side without forcing the project into a music-tour model.
             </p>
             <p className="text-sm text-foreground/80 leading-relaxed mb-4">
-              Their debut album <em>Lucid Architecture</em> (2025, Midnight Structures) received widespread acclaim for its intricate production and emotional depth. The follow-up EP <em>Infinite Drift</em> continues to push boundaries with weightless textures and pulsing sub-bass drawn from field recordings captured across Northern Europe.
+              Meti's current focus is translating studio material into a clean online viewing experience that still preserves texture, scale, and installation context. The fallback content in this repo is meant to be swapped with real work as the site evolves.
             </p>
             <p className="text-sm text-foreground/80 leading-relaxed">
-              Beyond the decks, Ocean is an accomplished choreographer and dancer, integrating movement into their creative practice and live performances. They currently reside in Metro City, where they run their studio and host the monthly Tideshift radio show.
+              Supabase remains available for journal publishing, comments, and sign-in flows, but the browsing experience now works locally even without a configured backend.
             </p>
           </div>
         </div>

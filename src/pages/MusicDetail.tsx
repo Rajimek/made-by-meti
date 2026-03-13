@@ -14,8 +14,8 @@ const MusicDetail = () => {
         <main className="main-content">
           <div style={{ padding: 6 }}>
             <div className="bg-background p-10 md:p-12">
-              <p className="text-muted-foreground">Release not found.</p>
-              <Link to="/music" className="text-foreground underline mt-4 inline-block">Back to music</Link>
+              <p className="text-muted-foreground">Artwork not found.</p>
+              <Link to="/artworks" className="text-foreground underline mt-4 inline-block">Back to artworks</Link>
             </div>
           </div>
         </main>
@@ -32,7 +32,7 @@ const MusicDetail = () => {
             {/* Left – info pane */}
             <div className="w-full md:w-1/2 bg-background p-10 md:p-12 flex flex-col">
               <Link
-                to="/music"
+                to="/artworks"
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors mb-8"
               >
                 <ArrowLeft size={14} />
@@ -51,7 +51,7 @@ const MusicDetail = () => {
                 {release.description}
               </p>
 
-              {/* Streaming links */}
+              {/* Resource links */}
               <div className="mb-10">
                 {release.links.map((link, i) => (
                   <a

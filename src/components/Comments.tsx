@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,6 +21,8 @@ const Comments = ({ contentType, contentId }: CommentsProps) => {
   const { data: comments = [] } = useQuery({
     queryKey: ["comments", contentType, contentId],
     queryFn: async () => {
+      if (!hasSupabaseConfig) return [];
+
       // Fetch comments
       const { data: commentsData, error } = await supabase
         .from("comments")
@@ -47,6 +49,10 @@ const Comments = ({ contentType, contentId }: CommentsProps) => {
 
   const postMutation = useMutation({
     mutationFn: async (text: string) => {
+      if (!hasSupabaseConfig) {
+        throw new Error("Comments are unavailable until Supabase is configured.");
+      }
+
       const { error } = await supabase.from("comments").insert({
         user_id: user!.id,
         content_type: contentType,
@@ -72,6 +78,12 @@ const Comments = ({ contentType, contentId }: CommentsProps) => {
         Comments
       </h2>
 
+      {!hasSupabaseConfig && (
+        <p className="text-sm text-muted-foreground mb-8">
+          Comments are disabled until Supabase auth and database tables are configured.
+        </p>
+      )}
+
       <div className="space-y-5 mb-8">
         {comments.map((c) => {
           const initials = (c.username || "U").slice(0, 2).toUpperCase();
@@ -96,7 +108,7 @@ const Comments = ({ contentType, contentId }: CommentsProps) => {
         )}
       </div>
 
-      {user ? (
+      {hasSupabaseConfig && user ? (
         <>
           <Textarea
             placeholder="Add a comment..."
@@ -114,11 +126,11 @@ const Comments = ({ contentType, contentId }: CommentsProps) => {
             {postMutation.isPending ? "Posting..." : "Post"}
           </Button>
         </>
-      ) : (
+      ) : hasSupabaseConfig ? (
         <p className="text-sm text-muted-foreground">
           <Link to="/login" className="underline hover:text-foreground">Sign in</Link> to leave a comment.
         </p>
-      )}
+      ) : null}
     </div>
   );
 };

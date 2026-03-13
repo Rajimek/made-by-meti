@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -107,14 +107,19 @@ html {
   background: #fff;
 }
 
+:root {
+  --sidebar-width: 220px;
+}
+
 /* ── Sidebar ── */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: fit-content;
+  width: var(--sidebar-width);
   height: 100vh;
   padding: 30px 20px;
+  box-sizing: border-box;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -154,13 +159,30 @@ html {
 }
 
 .sidebar-brand {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 18px;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 0.05em;
   margin-bottom: 30px;
   padding: 12px;
+}
+
+.brand-lockup {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  color: #000;
+}
+
+.brand-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .sidebar-nav {
@@ -193,7 +215,8 @@ html {
 /* Main content offset for sidebar */
 .app-layout main {
   flex: 1;
-  margin-left: 100px;
+  min-width: 0;
+  margin-left: var(--sidebar-width);
 }
 
 /* Hamburger button — hidden on desktop */
@@ -468,30 +491,55 @@ html {
 
 /* ── Listing Grid ── */
 .listing-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
   padding: 6px;
   background: hsl(var(--background));
-}
-
-@media (min-width: 641px) {
-  .listing-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 .listing-tile {
   display: block;
   text-decoration: none;
+  overflow: hidden;
+}
+
+.listing-grid--uniform {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+@media (min-width: 641px) {
+  .listing-grid--uniform {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.listing-grid--justified {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.listing-row {
+  display: flex;
+  gap: 6px;
+}
+
+.listing-grid--justified .listing-tile {
+  flex: 0 0 auto;
+  height: 100%;
 }
 
 .listing-tile-inner {
   position: relative;
   width: 100%;
-  padding-bottom: 100%;
+  aspect-ratio: var(--tile-ratio, 1 / 1);
   overflow: hidden;
   background: hsl(var(--muted));
+}
+
+.listing-tile-inner--fill {
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .listing-tile-overlay {
@@ -598,4 +646,3 @@ html {
   padding: 48px 24px;
   text-align: center;
 }
-

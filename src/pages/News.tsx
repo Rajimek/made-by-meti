@@ -1,31 +1,36 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
-import { supabase } from "@/integrations/supabase/client";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
+import journalPosts, { type JournalPost } from "@/data/journal";
 import { format } from "date-fns";
+import bioCover from "@/assets/bio-cover.jpg";
 
-const coverImage = "https://images.unsplash.com/photo-1761792444425-1bae3ba0c86b?w=1600&q=80&auto=format&fit=crop";
-
-interface NewsPost {
-  id: string;
-  title: string;
-  slug: string;
-  body: string;
-  cover_image: string | null;
-  published_at: string;
-}
+const coverImage = bioCover;
 
 const News = () => {
-  const [posts, setPosts] = useState<NewsPost[]>([]);
+  const [posts, setPosts] = useState<JournalPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!hasSupabaseConfig) {
+      setPosts(journalPosts);
+      setLoading(false);
+      return;
+    }
+
     supabase
       .from("news_posts")
       .select("*")
       .order("published_at", { ascending: false })
-      .then(({ data }) => {
-        setPosts((data as NewsPost[]) ?? []);
+      .then(({ data, error }) => {
+        if (error || !data?.length) {
+          setPosts(journalPosts);
+          setLoading(false);
+          return;
+        }
+
+        setPosts((data as JournalPost[]) ?? []);
         setLoading(false);
       });
   }, []);
@@ -38,14 +43,14 @@ const News = () => {
           <div className="bio-cover">
             <img
               src={coverImage}
-              alt="News"
+              alt="Journal"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
           </div>
 
           <div className="bio-text">
             <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-foreground mb-8">
-              News
+              Journal
             </h1>
 
             {loading && <p className="text-sm text-foreground/60">Loading…</p>}
@@ -53,7 +58,7 @@ const News = () => {
             {posts.map((post) => (
               <article key={post.id} className="mb-10">
                 <Link
-                  to={`/news/${post.slug}`}
+                  to={`/journal/${post.slug}`}
                   className="text-xl md:text-2xl font-bold uppercase tracking-tight text-foreground hover:underline"
                 >
                   {post.title}

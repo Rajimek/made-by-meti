@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { hasSupabaseConfig, supabase } from "@/integrations/supabase/client";
 import Sidebar from "@/components/Sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,27 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+
+  if (!hasSupabaseConfig) {
+    return (
+      <div className="app-layout">
+        <Sidebar />
+        <main className="main-content">
+          <div style={{ padding: 6 }}>
+            <div className="bg-background p-10 md:p-12 max-w-md">
+              <h1 className="text-2xl font-bold uppercase tracking-tight text-foreground mb-4">Account</h1>
+              <p className="text-sm text-muted-foreground mb-4">
+                Authentication is disabled until Supabase environment variables are configured.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Add values to <code>.env</code> if you want login, comments, and newsletter signups.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (user) {
     return (
@@ -66,8 +87,8 @@ const Login = () => {
         if (error) throw error;
         navigate("/");
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }

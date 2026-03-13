@@ -5,30 +5,17 @@ export interface TourDate {
 }
 
 export const tourDates: TourDate[] = [
-  { date: "JAN 30", venue: "The Spectrum · Afterglow · Metro City" },
-  { date: "FEB 14", venue: "The Underground · Harbor District" },
-  { date: "FEB 28", venue: "Seven Frequencies · Westside · Metro City" },
-  { date: "MARCH 13", venue: "The Crossing · Metro City" },
-  { date: "MARCH 16 – APR 02", venue: "Time Off" },
-  { date: "APR 04", venue: "Echo Chamber · Northshore" },
-  { date: "APR 10", venue: "Nebula Sound · Industrial Quarter · Basel (CH)" },
-  { date: "APR 26", venue: "Spring Night w/ Guest Artist All Nighter · The Jewel Box · Metro City" },
-  { date: "MAY 17", venue: "Garden Sessions · Abbey Gardens (BE)" },
-  { date: "MAY 23", venue: "Urban Pulse Festival · West Gardens · Metro City" },
-  { date: "JUN 06", venue: "Open Mind Festival · Riverside City" },
-  { date: "JUN 25", venue: "Sky Festival · Airfield District (DE)" },
-  { date: "JUN 27", venue: "Beachside Events w/ Guest Artist · Beach Club 69 · Coastal Town" },
-  { date: "JUL 25", venue: "TIDESHIFT BEACH — All Day Long · Sunset Charlie · Beachfront", ticketLink: "#" },
-  { date: "AUG 07", venue: "Harmony Festival · The Garden Resort · Coastal Region (HRV)" },
-  { date: "AUG 08", venue: "Frequency Festival · Metro City" },
+  { date: "APR 04 – MAY 01", venue: "Material Echoes · Civic Gallery · Portland", ticketLink: "#" },
+  { date: "MAY 16 – JUN 07", venue: "Open Studio Viewing Room · MADE · Seattle" },
+  { date: "JUN 21 – JUL 19", venue: "Kiln Studies · Clay House · Los Angeles", ticketLink: "#" },
+  { date: "AUG 08 – SEP 14", venue: "Soft Bodies · Warehouse Annex · New York" },
+  { date: "OCT 03 – NOV 02", venue: "After Glaze Archive · Project Space · Chicago", ticketLink: "#" },
+  { date: "NOV 21 – DEC 14", venue: "Winter Viewing Appointments · MADE · Seattle" },
 ];
 
 export const recordings = [
-  "Ocean ° Tideshift ° Jan 2026",
-  "Ocean ° YEARMIX ° 2025",
-  "Ocean ° Tideshift 159 ° Dec 2025",
-  "Ocean ° Tideshift 158 ° Nov 2025",
-  "Ocean ° Live Tideshift Recording ° July 2025",
-  "Ocean ° Live at Frequency ADE ° Oct 2024",
-  "Ocean ° Live at Midnight Club Berlin ° March 2024",
+  "MADE ° Open Studio Notes ° 2026",
+  "Meti ° Material Echoes Walkthrough ° 2025",
+  "MADE ° Kiln Study Diary ° 2025",
+  "Meti ° After Glaze Archive Talk ° 2024",
 ];
