@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import Isotope from "isotope-layout";
 import bioCover from "@/assets/bio-cover.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
-import performanceImg from "@/assets/performance.jpg";
 import portraitImg from "@/assets/portrait.jpg";
 import referenceImg from "@/assets/reference.png";
 import videoBg from "@/assets/video-bg.jpg";
+import {
+  catalog,
+  type Collection,
+  getCollectionBySlug,
+  getCollectionPath,
+} from "@/storefront";
 
 interface GridTileProps {
   type: string;
@@ -84,115 +89,95 @@ const GridTile = ({
   );
 };
 
+const featuredCollections = catalog.featuredCollectionSlugs
+  .map((slug) => getCollectionBySlug(slug))
+  .filter((collection): collection is Collection => Boolean(collection));
+
 const tiles: GridTileProps[] = [
   {
-    type: "ARTWORK",
-    title: "Salt Memory",
-    timestamp: "Series",
+    type: "SHOP",
+    title: "Shop All Ceramics",
+    timestamp: "Catalog",
     image: heroBg,
-    href: "/artworks/salt-memory",
+    href: "/shop",
     variant: "large",
   },
   {
-    type: "PROCESS",
-    title: "Studio Walkthrough",
-    timestamp: "Film",
-    image: videoBg,
-    href: "/process/studio-walkthrough-salt-memory",
+    type: "COLLECTION",
+    title: featuredCollections[0]?.name ?? "Ritual Vessels",
+    timestamp: featuredCollections[0]?.shortDescription ?? "Collection",
+    image: bioCover,
+    href: featuredCollections[0] ? getCollectionPath(featuredCollections[0].slug) : "/collections",
     variant: "wide",
   },
   {
-    type: "ARTWORK",
-    title: "Kiln Study 03",
-    timestamp: "Object",
+    type: "COLLECTION",
+    title: featuredCollections[1]?.name ?? "Ash Glaze",
+    timestamp: featuredCollections[1]?.shortDescription ?? "Collection",
     image: portraitImg,
-    href: "/artworks/kiln-study-03",
+    href: featuredCollections[1] ? getCollectionPath(featuredCollections[1].slug) : "/collections",
     variant: "tall",
   },
   {
-    type: "ARTWORK",
-    title: "Museum Light",
-    timestamp: "Installation",
+    type: "COLLECTION",
+    title: featuredCollections[2]?.name ?? "Table Forms",
+    timestamp: featuredCollections[2]?.shortDescription ?? "Collection",
     image: referenceImg,
-    href: "/artworks/museum-light",
+    href: featuredCollections[2] ? getCollectionPath(featuredCollections[2].slug) : "/collections",
     variant: "square",
   },
   {
-    type: "JOURNAL",
-    title: "Building MADE",
-    timestamp: "Entry",
-    image: bioCover,
-    href: "/journal/building-made",
-    variant: "square",
-  },
-  {
-    type: "EXHIBITION",
-    title: "Material Echoes",
-    timestamp: "Upcoming",
-    image: performanceImg,
-    href: "/exhibitions",
-    variant: "square",
-  },
-  {
-    type: "ARTWORK",
-    title: "Cinder Atlas",
-    timestamp: "Relief",
-    image: heroBg,
-    href: "/artworks/cinder-atlas",
-    variant: "square",
-  },
-  {
-    type: "PROCESS",
-    title: "Glaze Tests",
-    timestamp: "Studio Note",
-    image: portraitImg,
-    href: "/process/glaze-tests-and-material-swatches",
-    variant: "square",
-  },
-  {
-    type: "ARTWORK",
-    title: "Soft Bodies",
-    timestamp: "Wall Work",
-    image: bioCover,
-    href: "/artworks/soft-bodies",
-    variant: "square",
-  },
-  {
-    type: "JOURNAL",
-    title: "Open Studio Notes",
-    timestamp: "Entry",
+    type: "SUPPORT",
+    title: "Shipping & Returns",
+    timestamp: "Policy",
     image: videoBg,
-    href: "/journal/open-studio-notes",
+    href: "/shipping-returns",
     variant: "square",
   },
   {
-    type: "ARTWORK",
-    title: "After Glaze",
-    timestamp: "Series",
-    image: referenceImg,
-    href: "/artworks/after-glaze",
-    variant: "square",
-  },
-  {
-    type: "PROCESS",
-    title: "Installing Tactile Echoes",
-    timestamp: "Film",
-    image: performanceImg,
-    href: "/process/installing-tactile-echoes",
-    variant: "square",
-  },
-  {
-    type: "EXHIBITION",
-    title: "Warehouse Viewing Room",
-    timestamp: "Archive",
+    type: "SUPPORT",
+    title: "FAQ",
+    timestamp: "Answers",
     image: heroBg,
-    href: "/exhibitions",
+    href: "/faq",
+    variant: "square",
+  },
+  {
+    type: "ACCESS",
+    title: "Contact",
+    timestamp: "Inquiry",
+    image: bioCover,
+    href: "/contact",
+    variant: "square",
+  },
+  {
+    type: "ACCOUNT",
+    title: "Account",
+    timestamp: "Orders / profile",
+    image: portraitImg,
+    href: "/account",
+    variant: "square",
+  },
+  {
+    type: "SUPPORT",
+    title: "Track Order",
+    timestamp: "Lookup",
+    image: referenceImg,
+    href: "/track-order",
+    variant: "square",
+  },
+  {
+    type: "ADMIN",
+    title: "Admin Account",
+    timestamp: "Backend",
+    image: videoBg,
+    href: "/admin",
     variant: "wide",
   },
   {
     type: "ABOUT",
-    title: "Meti / Practice",
-    timestamp: "Profile",
+    title: "About",
+    timestamp: "Studio",
     image: bioCover,
     href: "/about",
     variant: "square",

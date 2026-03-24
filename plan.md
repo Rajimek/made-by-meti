@@ -11,6 +11,14 @@ Turn the current MADE site into an online ceramics storefront that can:
 - let an admin publish and manage products
 - run on AWS for hosting and backend infrastructure
 
+## Non-Negotiable Frontend Constraint
+
+This storefront version must be an enhancement of the current MADE site, not a visual redesign.
+
+- keep the current CSS, styling, spacing, and overall page presentation intact
+- reuse the existing visual system for all new storefront pages, states, and components
+- limit frontend changes to commerce features and functionality, not a page makeover
+
 ## Recommended Direction
 
 ### Recommendation: Shopify-first commerce stack
@@ -123,6 +131,7 @@ Reason:
 - `Home`
 - `About`
 - the overall minimalist visual direction
+- the existing CSS and page styling as-is
 
 ### Add for storefront v1
 
@@ -153,6 +162,7 @@ Reason:
 - account needs profile editing, address management, and order history
 - order detail page needs fulfillment status, tracking number, and shipment progress
 - admin uploads must support multiple images per product and optional product story text
+- all storefront additions must reuse the current CSS and visual patterns with no intentional redesign
 
 ## Backend Requirements
 
@@ -326,6 +336,7 @@ Why:
 - add real cart state
 - add account pages
 - add order history / tracking page
+- layer new storefront features into the existing shell without changing the established page styling
 
 ## Phase 5: Admin and operations
 

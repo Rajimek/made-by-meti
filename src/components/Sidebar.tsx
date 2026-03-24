@@ -13,11 +13,12 @@ const Sidebar = () => {
   const isMobile = useIsMobile();
 
   const navLinks = [
-    { to: "/artworks", label: "ARTWORKS" },
-    { to: "/process", label: "PROCESS" },
-    { to: "/exhibitions", label: "EXHIBITIONS" },
-    { to: "/journal", label: "JOURNAL" },
+    { to: "/shop", label: "SHOP" },
+    { to: "/collections", label: "COLLECTIONS" },
+    { to: "/shipping-returns", label: "SUPPORT" },
     { to: "/about", label: "ABOUT" },
+    { to: "/account", label: "ACCOUNT" },
+    ...(user?.role === "admin" ? [{ to: "/admin", label: "ADMIN" }] : []),
   ];
 
   const handleNavClick = () => {
@@ -56,7 +57,7 @@ const Sidebar = () => {
                 <Link
                   to={link.to}
                   style={{
-                    color: location.pathname === link.to ? "#000" : undefined,
+                    color: location.pathname === link.to || location.pathname.startsWith(`${link.to}/`) ? "#000" : undefined,
                   }}
                 >
                   {link.label}
@@ -72,9 +73,9 @@ const Sidebar = () => {
             {socials}
           </div>
           <Link
-            to="/login"
+            to="/account"
             className="sidebar-social-link"
-            title={user ? "Account" : "Login"}
+            title={user ? "Account" : "Account"}
           >
             <User size={24} />
           </Link>
@@ -107,7 +108,7 @@ const Sidebar = () => {
                   to={link.to}
                   onClick={handleNavClick}
                   style={{
-                    color: location.pathname === link.to ? "#000" : undefined,
+                    color: location.pathname === link.to || location.pathname.startsWith(`${link.to}/`) ? "#000" : undefined,
                   }}
                 >
                   {link.label}
@@ -120,10 +121,10 @@ const Sidebar = () => {
               {socials}
             </div>
             <Link
-              to="/login"
+              to="/account"
               className="sidebar-social-link"
               onClick={handleNavClick}
-              title={user ? "Account" : "Login"}
+              title={user ? "Account" : "Account"}
             >
               <User size={24} />
             </Link>
